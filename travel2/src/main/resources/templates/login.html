@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/base.css}">
+  <link rel="stylesheet" th:href="@{/css/form.css}">
+  <title>Login</title>
+</head>
+<header>
+  <nav>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/destinations}">Destinations</a></li>
+      <li><a th:href="@{/attractions}">Attractions</a></li>
+      <li><a th:href="@{/contact}">Contact</a></li>
+      <li><a th:href="@{/register}">Register</a></li>
+      </li>
+    </ul>
+  </nav>
+  <!-- Add the dropdown for light/dark mode -->
+
+</header>
+<main>
+  <section>
+    <h1>Login</h1>
+    <form th:action="@{/login}" method="post">
+      <label>Username: <input type="text" name="username" /></label><br>
+      <label>Password: <input type="password" name="password" /></label><br>
+      <button type="submit">Login</button>
+      <p>Not a member?... <a th:href="@{/register}">Sign up</a></p>
+    </form>
+  </section>
+</main>
+<footer>
+  <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</html>

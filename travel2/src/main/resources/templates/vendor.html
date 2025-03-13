@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Ticket Verification - Travel Explorer</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/manage-attractions.css}">
+    <script defer th:src="@{/js/darkMode.js}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        .verify-container {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            margin: 20px auto;
+            background-color: #333;
+            color: #f2f2f2;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: "Playwrite MX", cursive;
+            color: #f2f2f2;
+        }
+
+        .form-group {
+            margin: 1rem 0;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 5px;
+            border: 1px solid #555;
+        }
+
+        button.verify-btn {
+            background-color: #00ADB5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button.verify-btn:hover {
+            background-color: #008c93;
+        }
+
+        #result {
+            margin-top: 1rem;
+            font-size: 1.2em;
+            font-family: "Playwrite MX", cursive;
+        }
+
+        body.dark-mode .verify-container {
+            background-color: #393E46;
+        }
+    </style>
+    <script>
+        async function verifyTicket() {
+            const uniqueCode = document.getElementById('uniqueCode').value;
+            const resultDiv = document.getElementById('result');
+            try {
+                const response = await fetch('/api/vendor/verify-ticket', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'uniqueCode=' + encodeURIComponent(uniqueCode)
+                });
+                const text = await response.text();
+                resultDiv.textContent = text;
+                resultDiv.style.color = response.ok ? '#00ADB5' : '#FF6B6B';
+            } catch (error) {
+                resultDiv.textContent = 'Error verifying ticket';
+                resultDiv.style.color = '#FF6B6B';
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" class="logo-link">
+                    <img th:src="@{/image/logo.png}" alt="Travel Explorer Logo" class="logo">
+                </a>
+            </li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/vendor}">Verify Tickets</a></li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" class="logout-form">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class="mode-toggle">
+        <select id="theme-select">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+</header>
+<main>
+    <div class="verify-container">
+        <h1>Ticket Verification</h1>
+        <div class="form-group">
+            <input type="text" id="uniqueCode" placeholder="Enter Ticket Code" required>
+            <button class="verify-btn" onclick="verifyTicket()">Verify Ticket</button>
+        </div>
+        <div id="result"></div>
+    </div>
+</main>
+<footer>
+    <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</body>
+</html>

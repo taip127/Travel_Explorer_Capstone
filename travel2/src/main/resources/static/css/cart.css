@@ -1,0 +1,144 @@
+/* cart.css */
+
+/* Container for the cart */
+.cart-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Cart table styling */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.cart-table th {
+    background-color: #222831;
+    color: #EEEEEE;
+}
+
+.cart-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.cart-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Inline form styling */
+.inline-form {
+    display: inline-block;
+    margin: 0;
+}
+
+.inline-form input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.inline-form button {
+    padding: 5px 10px;
+    background-color: #00ADB5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.inline-form button:hover {
+    background-color: #008c93;
+}
+
+/* Delete button specific styling */
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Checkout container */
+.checkout-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.checkout-btn {
+    padding: 10px 30px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+.checkout-btn:hover {
+    background-color: #45a049;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .cart-container {
+    color: #EEEEEE;
+}
+
+body.dark-mode .cart-table {
+    border-color: #00ADB5;
+}
+
+body.dark-mode .cart-table th {
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+
+body.dark-mode .cart-table tr:nth-child(even) {
+    background-color: #393E46;
+}
+
+body.dark-mode .cart-table tr:hover {
+    background-color: #4a5058;
+}
+
+body.dark-mode .inline-form input[type="number"] {
+    background-color: #393E46;
+    color: #EEEEEE;
+    border-color: #00ADB5;
+}
+
+body.dark-mode .inline-form button {
+    background-color: #00ADB5;
+}
+
+body.dark-mode .inline-form button:hover {
+    background-color: #008c93;
+}
+
+body.dark-mode .delete-btn {
+    background-color: #dc3545;
+}
+
+body.dark-mode .delete-btn:hover {
+    background-color: #c82333;
+}
+
+body.dark-mode .checkout-btn {
+    background-color: #4CAF50;
+}
+
+body.dark-mode .checkout-btn:hover {
+    background-color: #45a049;
+}

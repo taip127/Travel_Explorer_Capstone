@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/destinations.css}">
+    <script defer th:src="@{/js/darkMode.js}"></script>
+    <script defer th:src="@{/js/destinations.js}"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" class="logo-link">
+                    <img th:src="@{/image/logo.png}" alt="Travel Explorer Logo" class="logo">
+                </a>
+            </li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/destinations}">Destinations</a></li>
+            <li><a th:href="@{/attractions}">Attractions</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li><a th:href="@{/orderdetail}">View Cart</a></li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/register}">Register</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">Sign In</a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="user-greeting">
+                <span>Hello, <span sec:authentication="name">Guest</span></span>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" class="logout-form">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class="mode-toggle">
+        <select id="theme-select">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+</header>
+
+<main>
+    <h1>Explore Amazing Destinations Near Austin, Texas</h1>
+    <div style="
+            position: relative;
+            width: 100%;
+            height: 90vh;
+            background: url('https://images.unsplash.com/photo-1588993608283-7f0eda4438be?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+            no-repeat center center/cover;
+        ">
+        <div id="destinations-container" class="destinations-container">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Attractions</title>
+  <link rel="stylesheet" th:href="@{/css/base.css}">
+  <link rel="stylesheet" th:href="@{/css/attraction.css}">
+  <style>
+    /* Background image styling */
+    body {
+      background-image: url('https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_952,q_75,w_1903/v1/clients/austin/Barton_Springs_Pool_Sunset_Credit_Ryan_Kyte_Lifetime_Usage_ecf590c9-1679-45a5-ad54-afa1fddc7a3f.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    main {
+      background-color: rgba(255, 255, 255, 0.3); /* More transparency for the background */
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 50px; /* To avoid overlap with header */
+    }
+
+    /* Font styling for the "Browse Attractions" heading */
+    h1 {
+      font-family: 'Playwrite MX', cursive;
+      font-weight: 400;
+      font-size: 3em; /* Increase the font size */
+      color: white; /* Make text white */
+    }
+  </style>
+
+  <!-- Font Import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/" class="logo-link">
+          <img th:src="@{/image/logo.png}" alt="Travel Explorer Logo" class="logo">
+        </a>
+      </li>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/destinations}">Destinations</a></li>
+      <li><a th:href="@{/attractions}">Attractions</a></li>
+      <li><a th:href="@{/contact}">Contact</a></li>
+      <li><a th:href="@{/orderdetail}">View Cart</a></li>
+      <li sec:authorize="!isAuthenticated()">
+        <a th:href="@{/register}">Register</a>
+      </li>
+      <li sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}">Sign In</a>
+      </li>
+      <li sec:authorize="isAuthenticated()" class="user-greeting">
+        <span>Hello, <span sec:authentication="name">Guest</span></span>
+      </li>
+      <li sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post" class="logout-form">
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+  <div class="mode-toggle">
+    <select id="theme-select">
+      <option value="light">Light Mode</option>
+      <option value="dark">Dark Mode</option>
+    </select>
+  </div>
+</header>
+
+<main>
+  <h1>Buy your tickets here at amazing discount!</h1>
+
+  <!-- Display message if attractions list is empty -->
+  <p th:if="${#lists.isEmpty(attractions)}">No attractions available at the moment.</p>
+
+  <!-- Single form wrapping all attractions -->
+  <form th:action="@{/orderdetail/add}" method="post">
+    <div class="attractions-container">
+      <div th:each="attraction : ${attractions}" class="attraction-card">
+        <h2 th:text="${attraction.name}">Attraction Name</h2>
+        <a th:href="${attraction.linkUrl}" target="_blank">
+          <img th:src="@{${attraction.imgUrl}}" alt="Attraction Image" class="attraction-image">
+        </a>
+        <p th:text="${attraction.description}">Attraction Description</p>
+        <p><strong>Price:</strong> $<span th:text="${attraction.price}">0.00</span></p>
+        <p><strong>Location:</strong> <span th:text="${attraction.location}">Unknown</span></p>
+        <p><strong>Available Tickets:</strong> <span th:text="${attraction.availableTickets}">0</span></p>
+
+        <!-- Hidden input for attraction ID and quantity input -->
+        <input type="hidden" th:name="'attractionId-' + ${attraction.id}" th:value="${attraction.id}">
+        <label th:for="'quantity-' + ${attraction.id}">Quantity:</label>
+        <input type="number" th:id="'quantity-' + ${attraction.id}" th:name="'quantity-' + ${attraction.id}"
+               min="0" th:attr="max=${attraction.availableTickets}" value="0">
+      </div>
+    </div>
+
+    <!-- Single Place Order button -->
+    <div class="order-button-container">
+      <button type="submit">Place Order</button>
+    </div>
+  </form>
+</main>
+
+<footer>
+  <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+
+<script>
+  document.getElementById('theme-select').addEventListener('change', function() {
+    if (this.value === 'dark') {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  });
+</script>
+</body>
+</html>

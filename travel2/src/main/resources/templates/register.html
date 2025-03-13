@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}"> <!-- Add a CSS file for register page if needed -->
+    <script defer th:src="@{/js/darkMode.js}"></script>
+    <script defer th:src="@{/js/register.js}"></script> <!-- Link to the modified JavaScript file -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" class="logo-link">
+                    <img th:src="@{/image/logo.png}" alt="Travel Explorer Logo" class="logo">
+                </a>
+            </li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/destinations}">Destinations</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li><a th:href="@{/register}">Register</a></li>
+        </ul>
+    </nav>
+    <div class="mode-toggle">
+        <select id="theme-select">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main>
+    <h1>Register</h1>
+    <form id="registerForm" th:action="@{/register}" method="post" th:object="${buyer}">
+        <div th:if="${error}" style="color: red;">
+            [[${error}]]
+        </div>
+        <div th:if="${message}" style="color: green;">
+            [[${message}]]
+        </div>
+
+        <!-- Username Field -->
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" th:field="*{username}" required><br><br>
+
+        <!-- Email Field -->
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" th:field="*{email}" required><br>
+        <div id="emailError" class="error-message" style="color: red; display: none;">
+            Please enter a valid email address.
+        </div><br>
+
+        <!-- Password Field -->
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" th:field="*{password}" required><br>
+        <div id="passwordError" class="error-message" style="color: red; display: none;">
+            Password must be at least 8 characters long and include 1 uppercase letter, 1 lowercase letter, and 1 number.
+        </div><br>
+
+        <!-- Hidden Role Field, fixed to BUYER -->
+        <input type="hidden" name="role" value="BUYER"/>
+
+        <button type="submit">Register</button>
+
+        <p>Already a member?... <a th:href="@{/login}">Sign in</a></p>
+    </form>
+</main>
+
+<!-- Footer -->
+<footer>
+    <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</body>
+</html>

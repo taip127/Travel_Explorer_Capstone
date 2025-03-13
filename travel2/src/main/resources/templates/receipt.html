@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt - Travel Explorer</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/manage-attractions.css}">
+    <script defer th:src="@{/js/darkMode.js}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        .receipt-container {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            margin: 20px auto;
+            background-color: #333;
+            color: #f2f2f2;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1, h2, h3 {
+            font-family: "Playwrite MX", cursive;
+            color: #f2f2f2;
+        }
+
+        p {
+            font-family: "Playwrite MX", cursive;
+            font-weight: 300;
+            font-size: 1.2em;
+            color: #f2f2f2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #555;
+        }
+
+        th {
+            background-color: #444;
+        }
+
+        td {
+            background-color: #555;
+        }
+
+        .link-back a {
+            color: #00ADB5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-back a:hover {
+            color: #008c93;
+        }
+
+        button.print-btn {
+            background-color: #00ADB5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button.print-btn:hover {
+            background-color: #008c93;
+        }
+
+        body.dark-mode .receipt-container {
+            background-color: #393E46;
+        }
+
+        body.dark-mode th {
+            background-color: #4a5058;
+        }
+
+        body.dark-mode td {
+            background-color: #5a6268;
+        }
+    </style>
+    <script>
+        function printReceipt() {
+            const sbom = {
+                "bomFormat": "CycloneDX",
+                "specVersion": "1.5",
+                "version": 1,
+                "components": []
+            };
+            document.querySelectorAll('.ticket-item').forEach(item => {
+                sbom.components.push({
+                    "type": "attraction",
+                    "name": item.dataset.name,
+                    "version": "1.0",
+                    "description": "Travel Explorer Attraction",
+                    "externalReferences": [
+                        { "type": "price", "url": "$" + item.dataset.price },
+                        { "type": "quantity", "url": item.dataset.quantity }
+                    ]
+                });
+            });
+
+            const blob = new Blob([JSON.stringify(sbom, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'receipt-sbom.json';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            window.print();
+        }
+    </script>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" class="logo-link">
+                    <img th:src="@{/image/logo.png}" alt="Travel Explorer Logo" class="logo">
+                </a>
+            </li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/destinations}">Destinations</a></li>
+            <li><a th:href="@{/attractions}">Attractions</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li><a th:href="@{/orderdetail}">View Cart</a></li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/register}">Register</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">Sign In</a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="user-greeting">
+                <span>Hello, <span sec:authentication="name">Guest</span></span>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" class="logout-form">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class="mode-toggle">
+        <select id="theme-select">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+</header>
+<main>
+    <div class="receipt-container">
+        <h1>Payment Receipt</h1>
+        <p>Thank you, <span sec:authentication="name">Buyer Name</span>, for your purchase!</p>
+
+        <h2>Your Completed Order</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Attraction</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Ticket Code</th> <!-- Add this -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ticket : ${completedTickets}" class="ticket-item"
+                th:data-name="${ticket.attraction.name}"
+                th:data-price="${ticket.price}"
+                th:data-quantity="${ticket.quantity}">
+                <td th:text="${ticket.attraction.name} + ' - ' + ${ticket.attraction.location}">Attraction Name</td>
+                <td th:text="${ticket.quantity}">1</td>
+                <td th:text="'$' + ${ticket.price}">0.00</td>
+                <td th:text="'$' + ${ticket.totalPrice}">0.00</td>
+                <td th:text="${ticket.uniqueCode}">Unique Code</td> <!-- Add this column -->
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Total Price: <span th:text="'$' + ${totalPrice}">0.00</span></h3>
+
+        <button class="print-btn" onclick="printReceipt()">Print Receipt</button>
+
+        <div class="link-back">
+            <a th:href="@{/attractions}">Return to Attractions</a>
+        </div>
+    </div>
+</main>
+<footer>
+    <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</body>
+</html>

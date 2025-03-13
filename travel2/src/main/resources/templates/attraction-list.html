@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Attractions</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" class="logo-link">
+                    <img th:src="@{/image/logo.png}" alt="Travel Explorer Logo" class="logo">
+                </a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/register}">Register</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">Sign In</a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="user-greeting">
+                <span>Hello, <span sec:authentication="name">Guest</span></span>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" class="logout-form">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class="mode-toggle">
+        <select id="theme-select">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+</header>
+
+<main>
+    <h1>Browse Attractions</h1>
+
+    <p th:if="${#lists.isEmpty(attractions)}">No attractions available at the moment.</p>
+
+    <form th:action="@{/cart/add}" method="post" id="cartForm">
+        <div class="attractions-container">
+            <div th:each="attraction : ${attractions}" class="attraction-card">
+                <h2 th:text="${attraction.name}">Attraction Name</h2>
+                <p th:text="${attraction.description}">Attraction Description</p>
+                <p><strong>Price:</strong> $<span th:text="${attraction.price}">0.00</span></p>
+                <p><strong>Location:</strong> <span th:text="${attraction.location}">Unknown</span></p>
+                <p><strong>Available Tickets:</strong> <span th:text="${attraction.availableTickets}">0</span></p>
+
+                <label for="quantity-[[${attraction.id}]]">Quantity:</label>
+                <input type="number" id="quantity-[[${attraction.id}]]" name="quantities[[[${attraction.id}]]]" min="1"
+                       th:attr="max=${attraction.availableTickets}">
+            </div>
+        </div>
+
+        <button type="submit">Purchase</button>
+    </form>
+</main>
+
+<footer>
+    <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</body>
+</html>

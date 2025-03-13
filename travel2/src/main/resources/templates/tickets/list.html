@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <title>Ticket List</title>
+
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/destinations}">Destinations</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li><a th:href="@{/register}">Register</a></li>
+        </ul>
+    </nav>
+    <!-- Add the dropdown for light/dark mode -->
+    <div class="mode-toggle">
+        <select id="theme-select">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+</header>
+<main>
+    <section>
+        <h1>Ticket List</h1>
+        <a th:href="@{/tickets/add}">Add New Ticket</a>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ticket Code</th>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Username</th> <!-- New Column -->
+                <th>Attraction ID</th>
+                <th>Attraction Name</th> <!-- New Column -->
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ticket : ${tickets}">
+                <td th:text="${ticket.id}"></td>
+                <td th:text="${ticket.ticketCode}"></td>
+                <td th:text="${ticket.order.id}"></td>
+                <td th:text="${ticket.user.id}"></td>
+                <td th:text="${ticket.user.username}"></td> <!-- Username -->
+                <td th:text="${ticket.attraction.id}"></td>
+                <td th:text="${ticket.attraction.name}"></td> <!-- Attraction Name -->
+                <td>
+                    <a th:href="@{/tickets/edit/{id}(id=${ticket.id})}">Edit</a>
+                    <a th:href="@{/tickets/delete/{id}(id=${ticket.id})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<footer>
+    <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* base.css */
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #EEEEEE; /* Light Gray as base */
+    color: #222831; /* Dark Gray for text */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+h1 {
+    font-family: 'Playwrite MX', cursive;
+    font-weight: 400;
+    font-size: 2.5em;
+    color: #222831;
+}
+
+/* Header Styling */
+header {
+    background-color: #222831; /* Dark Gray for header */
+    color: #EEEEEE; /* Light Gray for text */
+    padding: 15px 20px; /* Adjusted padding */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically center contents */
+    justify-content: center; /* Center the nav by default */
+    transition: background-color 0.3s;
+}
+
+/* Navigation Styling */
+nav {
+    flex-grow: 1; /* Allow nav to take available space */
+    display: flex; /* Ensure nav itself is a flex container */
+    justify-content: center; /* Center the ul within nav */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Remove default margin */
+    display: flex; /* Display items horizontally */
+    align-items: center; /* Vertically center items, including logo */
+}
+
+nav ul li {
+    margin: 0 15px; /* Maintain spacing between items */
+    display: flex; /* Ensure each li aligns its contents */
+    align-items: center; /* Center contents vertically within li */
+}
+
+nav ul li a {
+    color: #EEEEEE; /* Light Gray for links */
+    text-decoration: none;
+    display: block; /* Ensures consistent clickable area */
+}
+
+nav ul li a:hover {
+    color: #00ADB5; /* Teal for hover */
+}
+
+/* Logo Styling */
+.logo {
+    height: 80px; /* Larger size; adjust as needed */
+    width: auto; /* Maintains aspect ratio */
+    display: block; /* Ensure logo behaves as a block within flex */
+}
+
+/* Mode Toggle Styling */
+.mode-toggle {
+    margin-left: 20px; /* Push it to the right with some spacing */
+}
+
+#theme-select {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #EEEEEE; /* Light Gray background */
+    color: #222831; /* Dark Gray text */
+    border: 1px solid #393E46; /* Slate Gray border */
+    cursor: pointer;
+}
+
+/* Main and Footer */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #222831; /* Dark Gray for footer */
+    color: #EEEEEE; /* Light Gray for text */
+    text-align: center;
+    padding: 1px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #222831; /* Dark Gray as base */
+    color: #EEEEEE; /* Light Gray for text */
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+    background-color: #393E46; /* Slate Gray for contrast */
+}
+
+body.dark-mode nav ul li a {
+    color: #EEEEEE; /* Light Gray for links */
+}
+
+body.dark-mode nav ul li a:hover {
+    color: #00ADB5; /* Teal for hover */
+}
+
+body.dark-mode #theme-select {
+    background-color: #393E46; /* Slate Gray background */
+    color: #EEEEEE; /* Light Gray text */
+    border: 1px solid #00ADB5; /* Teal border */
+}
+
+/* Logout Button */
+.logout-btn {
+    padding: 4px 8px; /* Smaller padding */
+    font-size: 0.9em; /* Smaller text */
+    background-color: #dc3545; /* Red color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; /* Aligns with other nav items */
+}
+
+.logout-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}

@@ -1,0 +1,10 @@
+/* index.css */
+
+/* Video Styles */
+main video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #00ADB5; /* Teal border */
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Explorer</title>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+
+    <script defer th:src="@{/js/darkMode.js}"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        main p {
+            font-family: "Playwrite MX", cursive;
+            font-weight: 300;
+            font-size: 1.2em;
+            color: #222831;
+        }
+        body.dark-mode p {
+            color: #EEEEEE;
+        }
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #e64a19;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #222831;
+            color: white;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #ff5722;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" class="logo-link">
+                    <img th:src="@{/image/logo.png}" alt="Travel Explorer Logo" class="logo">
+                </a>
+            </li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/destinations}">Destinations</a></li>
+            <li><a th:href="@{/attractions}">Attractions</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li sec:authorize="isAuthenticated() and (authentication.name != 'admin1@gmail.com' and authentication.name !='vendor1' )">
+                <a th:href="@{/orderdetail}">View Cart</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/register}">Register</a>
+            </li>
+            <li sec:authorize="isAuthenticated() and authentication.name == 'admin1@gmail.com'">
+                <a th:href="@{/Attractions/manage}">Manage Attractions</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">Sign In</a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="user-greeting">
+                <span>Hello, <span sec:authentication="name">Guest</span></span>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" class="logout-form">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class="mode-toggle">
+        <select id="theme-select">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+</header>
+<main>
+    <section>
+        <h1 style="font-family: 'Playwrite MX', cursive; font-weight: 1000; font-size: 3em; color: #222831;">Welcome to Travel Explorer</h1>
+        <p>Plan your perfect trip to Austin, Texas, with our tailored tour planning service. Discover the best attractions, local hotspots, and unique experiences the city has to offer, all while enjoying exclusive discounts on tickets to many popular attractions.</p>
+        <a href="/destinations" class="cta-button">Explore Destinations</a>
+        <a href="/attractions" class="cta-button">Get Tickets at Discount Prices for Many Attractions</a>
+        <video controls autoplay muted loop>
+            <source src="https://player.vimeo.com/progressive_redirect/playback/788833308/rendition/1080p/file.mp4?loc=external&signature=667252bd993109926ebb010d62c61949adb9db454afe707fcd2b78e0443c7d5b" type="video/mp4">
+            Visit Austin Video
+        </video>
+    </section>
+</main>
+<footer>
+    <p>© 2025 Travel Explorer. All rights reserved.</p>
+    <div class="social-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+</footer>
+</body>
+</html>

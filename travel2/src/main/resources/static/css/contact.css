@@ -1,0 +1,52 @@
+
+/* Table Styles */
+table {
+    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #393E46; /* Slate Gray for borders */
+    padding: 10px;
+}
+
+th {
+    background-color: #393E46; /* Slate Gray for header */
+    color: #EEEEEE; /* Light Gray text */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    background: #EEEEEE; /* Light Gray background */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input, textarea, button {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #393E46; /* Slate Gray border */
+    border-radius: 5px;
+}
+
+button {
+    background-color: #222831; /* Dark Gray background */
+    color: #00ADB5; /* Teal text */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #393E46; /* Slate Gray on hover */
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode form {
+    background: #393E46; /* Slate Gray background */
+    color: #EEEEEE; /* Light Gray text */
+}

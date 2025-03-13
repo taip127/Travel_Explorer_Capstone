@@ -1,0 +1,100 @@
+/* manage-attractions.css */
+
+/* Logout form and button in navigation */
+.logout-form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.logout-btn {
+    padding: 4px 8px; /* Smaller padding */
+    font-size: 0.9em; /* Smaller text */
+    background-color: #dc3545; /* Red color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; /* Aligns with other nav items */
+}
+
+.logout-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Ensure navigation items don’t overlap */
+nav ul li {
+    display: inline-block;
+    margin-right: 10px; /* Space between items */
+}
+
+/* User greeting alignment */
+.user-greeting {
+    display: inline-block;
+    margin-right: 5px;
+    color: #EEEEEE; /* Match your nav color */
+}
+
+/* Delete form and button in table */
+.delete-form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.delete-btn {
+    padding: 4px 8px; /* Smaller padding */
+    font-size: 0.9em; /* Smaller text */
+    background-color: #dc3545; /* Red color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; /* Aligns with Edit link */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Edit link alignment */
+.edit-link {
+    margin-right: 10px; /* Space before Delete button */
+    color: #00ADB5; /* Teal color */
+    text-decoration: none;
+}
+
+.edit-link:hover {
+    text-decoration: underline;
+}
+
+/* Ensure table cell content doesn’t overlap */
+.attraction-table td {
+    padding: 10px;
+    white-space: nowrap; /* Prevents wrapping */
+}
+
+/* Dark mode adjustments */
+body.dark-mode .logout-btn {
+    background-color: #dc3545;
+}
+
+body.dark-mode .logout-btn:hover {
+    background-color: #c82333;
+}
+
+body.dark-mode .user-greeting {
+    color: #EEEEEE;
+}
+
+body.dark-mode .delete-btn {
+    background-color: #dc3545;
+}
+
+body.dark-mode .delete-btn:hover {
+    background-color: #c82333;
+}
+
+body.dark-mode .edit-link {
+    color: #00ADB5;
+}

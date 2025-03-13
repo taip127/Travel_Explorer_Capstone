@@ -1,0 +1,77 @@
+
+.destinations-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Destination Card */
+.destination-card {
+    background: #F8F9FA;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    width: 280px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.destination-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #00ADB5;
+}
+
+.destination-card h2 {
+    font-family: 'Playwrite MX';
+    font-weight: 200;
+    font-size: 22px;
+    margin: 10px 0;
+    color: #222831;
+}
+
+.destination-card p {
+    font-size: 14px;
+    color: #393E46;
+    line-height: 1.5;
+}
+
+/* Hover Effect */
+.destination-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode {
+    background-color: #222831;
+    color: #EEEEEE;
+}
+
+body.dark-mode .destination-card {
+    background: #393E46;
+    color: #EEEEEE;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .destination-card h2 {
+    color: #EEEEEE;
+}
+
+body.dark-mode .destination-card p {
+    color: #DDDDDD;
+}
+
+.destination-card a {
+    text-decoration: none; /* Removes the underline */
+    font-weight: bold;
+    color: rgb(12, 9, 177);    /* Makes the text bold */
+}
+
+.destination-card a:hover {
+    color: #007bff;        /* Color when hovered */
+}

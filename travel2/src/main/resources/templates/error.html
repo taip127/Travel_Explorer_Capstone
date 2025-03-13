@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error - [[${status}]]</title>
+</head>
+<body>
+<h1>Oops! Something went wrong.</h1>
+<p>We're sorry, but the page you are looking for could not be found or an error occurred.</p>
+
+<p><strong>Status:</strong> [[${status}]] - [[${error}]]</p>
+<p><a th:href="@{/}">Return to Home Page</a></p>
+</body>
+</html>

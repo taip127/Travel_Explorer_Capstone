@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/base.css}">
+  <link rel="stylesheet" th:href="@{/css/form.css}">
+
+  <title>Add Ticket</title>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/destinations}">Destinations</a></li>
+      <li><a th:href="@{/contact}">Contact</a></li>
+      <li><a th:href="@{/register}">Register</a></li>
+    </ul>
+  </nav>
+  <!-- Add the dropdown for light/dark mode -->
+  <div class="mode-toggle">
+    <select id="theme-select">
+      <option value="light">Light Mode</option>
+      <option value="dark">Dark Mode</option>
+    </select>
+  </div>
+</header>
+<main>
+  <section>
+        <h1>Add Ticket</h1>
+        <form th:action="@{/tickets/add}" th:object="${ticket}" method="post">
+          <label>Ticket Code: <input type="text" th:field="*{ticketCode}" /></label><br>
+          <label>Order ID: <input type="number" th:field="*{order.id}" /></label><br>
+          <label>User ID: <input type="number" th:field="*{user.id}" /></label><br>
+          <label>Attraction ID: <input type="number" th:field="*{attraction.id}" /></label><br>
+          <button type="submit">Save</button>
+        </form>
+        <a th:href="@{/tickets}">Back to List</a>
+  </section>
+</main>
+<footer>
+  <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</body>
+</html>

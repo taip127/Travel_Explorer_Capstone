@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Attractions</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <link rel="stylesheet" th:href="@{/css/manage-attractions.css}">
+    <script defer th:src="@{/js/darkMode.js}"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" class="logo-link">
+                    <img th:src="@{/image/logo.png}" alt="Travel Explorer Logo" class="logo">
+                </a>
+            </li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/destinations}">Destinations</a></li>
+            <li><a th:href="@{/attractions}">Attractions</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button id="logout" type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class="mode-toggle">
+        <select id="theme-select">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+</header>
+<main>
+    <section>
+        <h1>Manage Attractions</h1>
+
+        <p th:if="${message}" th:text="${message}" style="color: green; text-align: center;"></p>
+        <p th:if="${error}" th:text="${error}" style="color: red; text-align: center;"></p>
+
+        <div class="add-link">
+            <a th:href="@{/attractions/new}">Add New Attraction</a>
+        </div>
+
+        <div th:if="${#lists.isEmpty(attractions)}">
+            <p>No attractions available.</p>
+        </div>
+        <div th:unless="${#lists.isEmpty(attractions)}" class="table-container">
+            <table class="attraction-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Location</th>
+                    <th>Available Tickets</th>
+                    <th>Image</th> <!-- New column for imgUrl -->
+                    <th>Link</th> <!-- New column for linkUrl -->
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="attraction : ${attractions}">
+                    <td th:text="${attraction.id}"></td>
+                    <td th:text="${attraction.name}"></td>
+                    <td th:text="${attraction.description}"></td>
+                    <td th:text="'$' + ${attraction.price}">0.00</td>
+                    <td th:text="${attraction.location}"></td>
+                    <td th:text="${attraction.availableTickets}"></td>
+                    <td>
+                        <img th:src="${attraction.imgUrl}" alt="Attraction Image" style="max-height: 50px; width: auto;" th:if="${attraction.imgUrl}">
+                        <span th:unless="${attraction.imgUrl}">No Image</span>
+                    </td>
+                    <td>
+                        <a th:href="${attraction.linkUrl}" th:text="${attraction.linkUrl}" target="_blank" th:if="${attraction.linkUrl}"></a>
+                        <span th:unless="${attraction.linkUrl}">No Link</span>
+                    </td>
+                    <td>
+                        <a th:href="@{/attractions/edit/{id}(id=${attraction.id})}" class="edit-link">Edit</a>
+                        <form th:action="@{/attractions/delete/{id}(id=${attraction.id})}" method="post" class="delete-form">
+                            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this attraction?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>© 2025 Travel Explorer. All rights reserved.</p>
+</footer>
+</body>
+</html>
