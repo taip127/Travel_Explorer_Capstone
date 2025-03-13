@@ -91,6 +91,4 @@ Contributing:
 4. Push: git push origin feature/your-feature
 5. Pull request
 
-License: MIT (see LICENSE file)
 
-Contact: GitHub Issues (https://github.com/yourusername/travel-explorer/issues)
