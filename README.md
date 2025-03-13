@@ -57,7 +57,9 @@ Usage:
 - Admin: /attractions/manage (manage attractions CRUD)
 - Vendor: /vendor (verify tickets) or POST /api/vendor/verify-ticket with uniqueCode
 
-Project Structure:
+## Project Structure
+
+```bash
 travel-explorer/
 ├── src/
 │   ├── main/
@@ -79,6 +81,7 @@ travel-explorer/
 │   └── test/                     # Unit/integration tests (to be added)
 ├── pom.xml                       # Maven dependencies
 └── README.md
+
 
 Future Enhancements:
 - QR codes for tickets
