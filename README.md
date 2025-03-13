@@ -31,13 +31,13 @@ Setup:
    git clone https://github.com/yourusername/travel-explorer.git
    cd travel-explorer
 2. Configure MySQL:
-   - Create database: CREATE DATABASE travel3;
+   - Create database: CREATE DATABASE travel4;
    - Update src/main/resources/application.properties:
-     spring.datasource.url=jdbc:mysql://localhost:3306/travel3
-     spring.datasource.username=your_username
-     spring.datasource.password=your_password
+     spring.datasource.url=jdbc:mysql://localhost:3306/travel4
+     spring.datasource.username=   your_username
+     spring.datasource.password=   your_password
      spring.jpa.hibernate.ddl-auto=update
-   - Run SQL: mysql -u your_username -p travel3 < src/main/resources/travel3.sql
+   - Run SQL: mysql -u your_username -p travel4 < src/main/resources/travel4.sql
 3. Add images to src/main/resources/static/image/:
    - zilker_park.jpg, barton_springs.jpg, lady_bird_lake.jpg, mount_bonnell.jpg, texas_capitol.jpg
 4. Build and run:
@@ -53,27 +53,35 @@ Default Users:
 Usage:
 - Browse: /attractions (click images for websites, add to cart)
 - Cart: /orderdetail (view, update, checkout)
-- Admin: /attractions/manage (manage attractions)
+- Receipt: Checkout and print receipt
+- Admin: /attractions/manage (manage attractions CRUD)
 - Vendor: /vendor (verify tickets) or POST /api/vendor/verify-ticket with uniqueCode
 
 Project Structure:
 travel-explorer/
-  src/
-    main/
-      java/com/tai/travel2/ - Config, controllers, models, services
-      resources/
-        static/ - CSS, JS, images
-        templates/ - HTML pages
-        application.properties - Config
-        travel3.sql - DB schema
-    test/ - Tests
-  pom.xml - Dependencies
-  README.txt
+├── src/
+│   ├── main/
+│   │   ├── java/com/tai/travel2/
+│   │   │   ├── config/           # Spring Security configuration
+│   │   │   ├── controller/       # REST and MVC controllers
+│   │   │   ├── model/            # JPA entities (User, Attraction, etc.)
+│   │   │   ├── repository/       # JPA repositories
+│   │   │   ├── service/          # Business logic
+│   │   │   └── Travel2Application.java  # Main application class
+│   │   ├── resources/
+│   │   │   ├── static/           # CSS, JS, and image files
+│   │   │   │   ├── css/
+│   │   │   │   ├── js/
+│   │   │   │   └── image/
+│   │   │   ├── templates/        # Thymeleaf HTML templates (home, attractions, cart, etc.)
+│   │   │   ├── application.properties  # App configuration
+│   │   │   └── travel4.sql       # Database schema and data
+│   └── test/                     # Unit/integration tests (to be added)
+├── pom.xml                       # Maven dependencies
+└── README.md
 
 Future Enhancements:
 - QR codes for tickets
-- Tests
-- Interactive maps for destinations
 - Payment integration
 
 Contributing:
