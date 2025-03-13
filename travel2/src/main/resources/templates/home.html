@@ -77,7 +77,7 @@
                 <a th:href="@{/register}">Register</a>
             </li>
             <li sec:authorize="isAuthenticated() and authentication.name == 'admin1@gmail.com'">
-                <a th:href="@{/Attractions/manage}">Manage Attractions</a>
+                <a th:href="@{/attractions/manage}">Manage Attractions</a>
             </li>
             <li sec:authorize="!isAuthenticated()">
                 <a th:href="@{/login}">Sign In</a>

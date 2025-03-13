@@ -61,8 +61,8 @@ public class MainController {
     @GetMapping("/contact")
     public String getContactPage() {return "contact";}
 
-    @GetMapping("/manage-attractions")
-    public String mangeAttractionsPage() {return "manage-attractions";}
+    /*@GetMapping("/manage-attractions")
+    public String mangeAttractionsPage() {return "manage-attractions";}*/
 
     @GetMapping("/test-auth")
     public ResponseEntity<String> testAuth(Authentication authentication) {

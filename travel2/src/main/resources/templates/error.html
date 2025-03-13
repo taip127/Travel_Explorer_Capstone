@@ -2,12 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Error - [[${status}]]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8d7da;
+            color: #721c24;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #dc3545;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
-<h1>Oops! Something went wrong.</h1>
-<p>We're sorry, but the page you are looking for could not be found or an error occurred.</p>
-
-<p><strong>Status:</strong> [[${status}]] - [[${error}]]</p>
-<p><a th:href="@{/}">Return to Home Page</a></p>
+<div class="container">
+    <h1>Oops! Something went wrong.</h1>
+    <p>We're sorry, but the page you are looking for could not be found or an error occurred.</p>
+    <p><strong>Status:</strong> [[${status}]] - [[${error}]]</p>
+    <p><a th:href="@{/}" class="btn">Return to Home Page</a></p>
+</div>
 </body>
 </html>

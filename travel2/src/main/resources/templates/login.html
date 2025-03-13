@@ -13,18 +13,19 @@
       <li><a th:href="@{/attractions}">Attractions</a></li>
       <li><a th:href="@{/contact}">Contact</a></li>
       <li><a th:href="@{/register}">Register</a></li>
-      </li>
     </ul>
   </nav>
-  <!-- Add the dropdown for light/dark mode -->
-
 </header>
 <main>
   <section>
     <h1>Login</h1>
+
+    <!-- Error message for wrong credentials -->
+    <p th:if="${param.error}" class="error" style="color: #c82333">Invalid username or password. Please try again.</p>
+
     <form th:action="@{/login}" method="post">
-      <label>Username: <input type="text" name="username" /></label><br>
-      <label>Password: <input type="password" name="password" /></label><br>
+      <label>Username: <input type="text" name="username" required /></label><br>
+      <label>Password: <input type="password" name="password" required /></label><br>
       <button type="submit">Login</button>
       <p>Not a member?... <a th:href="@{/register}">Sign up</a></p>
     </form>
